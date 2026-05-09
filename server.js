@@ -16,8 +16,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// Setup multer for uploads
-const upload = multer({ dest: 'uploads/' });
+// Setup multer for uploads (using memory storage to avoid missing directory errors on serverless/Railway)
+const upload = multer({ storage: multer.memoryStorage() });
 
 // Initialize Qdrant Client
 const qdrantClient = new QdrantClient({ 
@@ -96,9 +96,8 @@ app.post('/upload', upload.single('document'), async (req, res) => {
     try {
         if (!req.file) return res.status(400).send({ error: 'No file uploaded.' });
 
-        const filePath = req.file.path;
         const originalName = req.file.originalname;
-        const dataBuffer = fs.readFileSync(filePath);
+        const dataBuffer = req.file.buffer;
         
         let text = '';
         
@@ -109,12 +108,8 @@ app.post('/upload', upload.single('document'), async (req, res) => {
         } else if (originalName.toLowerCase().endsWith('.txt')) {
             text = dataBuffer.toString('utf-8');
         } else {
-            fs.unlinkSync(filePath);
             return res.status(400).send({ error: 'Unsupported file type. Only PDF and TXT are allowed.' });
         }
-        
-        // Clean up temp file
-        fs.unlinkSync(filePath);
 
         // Chunk text using sliding window
         const chunks = chunkText(text, originalName);
