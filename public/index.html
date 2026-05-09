@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotebookLM Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                <h1>NotebookLM Clone</h1>
+            </div>
+            <p>Upload a document to chat with its contents.</p>
+        </header>
+
+        <section id="upload-section" class="card">
+            <div class="upload-area" id="upload-area">
+                <input type="file" id="file-input" accept=".pdf,.txt" hidden>
+                <label for="file-input" class="upload-label">
+                    <div class="upload-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    </div>
+                    <span class="upload-text">Choose a .pdf or .txt file</span>
+                    <span class="upload-subtext">or drag and drop here</span>
+                </label>
+            </div>
+            <div class="file-actions">
+                <div id="file-name" class="file-name"></div>
+                <button id="upload-btn" class="btn primary" disabled>Upload & Index</button>
+            </div>
+            <div id="upload-status" class="status-message"></div>
+        </section>
+
+        <section id="chat-section" class="card hidden">
+            <div class="chat-container">
+                <div id="chat-history" class="chat-history">
+                    <div class="message assistant">
+                        <div class="message-content">Hello! I'm ready to answer questions about your document.</div>
+                    </div>
+                </div>
+                
+                <div class="chat-input-wrapper">
+                    <input type="text" id="question-input" placeholder="Ask a question about your document..." autocomplete="off">
+                    <button id="send-btn" class="btn icon-btn" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
