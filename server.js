@@ -213,7 +213,7 @@ Answer:`;
         res.json({ answer, sources });
     } catch (error) {
         console.error('Chat Error:', error);
-        res.status(500).send({ error: 'Error generating response.' });
+        res.status(500).send({ error: `Error generating response: ${error.message || error}` });
     }
 });
 
