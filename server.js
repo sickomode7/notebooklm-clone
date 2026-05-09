@@ -204,7 +204,7 @@ Answer:`;
 
         // Call LLM using Google AI Studio
         const response = await ai.models.generateContent({
-            model: 'gemini-2.5-pro',
+            model: 'gemma-3-27b-it',
             contents: [{ role: 'user', parts: [{ text: fullPrompt }] }],
         });
         
